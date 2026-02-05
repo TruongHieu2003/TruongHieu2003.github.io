@@ -385,10 +385,11 @@ p {
 <div id="letter-content" style="
   display:none;
   min-height:100vh;
-  background:#f8fbff;
-  padding:40px 20px;
+  background: linear-gradient(135deg, #eaf6ff, #f7fbff);
+  padding:50px 20px;
   font-family: 'Playfair Display', serif;
 ">
+
 
 
   <button onclick="backToChoose()" style="
@@ -403,47 +404,32 @@ p {
 
 
   
-  <h2 id="letter-title"></h2>
+<div style="
+  max-width:720px;
+  margin:30px auto 0;
+  background:white;
+  padding:36px 30px;
+  border-radius:18px;
+  box-shadow:0 25px 60px rgba(0,60,120,0.18);
+">
+
+  <h2 id="letter-title" style="
+    margin-bottom:20px;
+    color:#1f3a5f;
+  "></h2>
 
   <div id="letter-text" style="
-    margin-top:20px;
-    line-height:1.8;
-    font-size:1rem;
+    line-height:1.9;
+    font-size:1.05rem;
+    color:#4a6fa5;
   ">
 
-    test
     <!-- ANH GHI NỘI DUNG THƯ Ở ĐÂY -->
   </div>
 </div>
 
   
-  
-  
-<div id="content" style="display:none;">
-  <div class="letter">
-    <div class="date">
-      Một ngày bình thường
-    </div>
 
-    <h1>
-      Gửi Hoài Ý,
-    </h1>
-
-    <p>
-      Có những điều khi viết ra, anh không mong nó trở nên hoàn hảo.
-      Chỉ mong khi em đọc, em cảm thấy dễ chịu.
-    </p>
-
-    <p>
-      Như cách em xuất hiện —
-      không ồn ào,
-      nhưng đủ để mọi thứ xung quanh trở nên dịu lại.
-    </p>
-
-    <div class="signature">
-      —
-    </div>
-  </div>
 
 
 <script>
@@ -521,10 +507,54 @@ function openLetter(type) {
   document.getElementById("letter-content").style.display = "block";
   document.getElementById("letter-text").innerHTML = "";
 
-  if (type === "past") {
-    document.getElementById("letter-title").innerText = "📜 Quá khứ";
-    document.getElementById("letter-text").innerText = "Anh sẽ viết về quá khứ ở đây...";
-  } else {
+if (type === "past") {
+  document.getElementById("letter-title").innerText = "📜 Quá khứ";
+
+  document.getElementById("letter-text").innerHTML = `
+    <p>
+      Em viết mấy cái này không có giỏi đâu nhưng mà vẫn phải nói để cho chị biết
+      suy nghĩ của em về chuyện tụi mình.
+    </p>
+
+    <p>
+      Em không mong là cái này viết ra nó hoàn hảo nhưng mà mong là khi chị đọc
+      sẽ cảm thấy dễ chịu hơn.
+    </p>
+
+    <p>
+      Đầu tiên là chuyện của em và bạn cũ, em chắc chắn với chị là em sẽ không còn
+      liên quan gì tới bạn nữa.
+    </p>
+
+    <p>
+      Vì những lần trước em có quan niệm là dù chia tay không còn tình thì cũng còn nghĩa,
+      bạn bè chơi với nhau vài năm nói bỏ cũng đâu có dễ dàng gì huống chi là mối quan hệ này
+      đúng hong.
+    </p>
+
+    <p>
+      Nhưng mà khi em phát hiện ra nếu em giữ quan niệm này thì bạn cũng không thay đổi
+      mà lại càng ỷ y là em lúc nào cũng bên cạnh.
+    </p>
+
+    <p>
+      Còn tình cảm thì em đã không còn với bạn từ lâu rồi,
+      ở lại chỉ vì trách nhiệm và cái quan niệm rách này.
+    </p>
+
+    <p>
+      Lời cuối cùng của nội dung này là nếu chị đã chọn em,
+      không phải đánh cược nhưng chị phải luôn tin tưởng em nha.
+    </p>
+
+    <p>
+      Em biết chị cũng không quan tâm chuyện này mấy nhưng em phải nói,
+      em cám ơn chị đọc hết nhaa 💙
+    </p>
+  `;
+}
+
+  else {
     document.getElementById("letter-title").innerText = "✉️ Hiện tại";
     document.getElementById("letter-text").innerText = "Anh sẽ viết về hiện tại ở đây...";
   }
