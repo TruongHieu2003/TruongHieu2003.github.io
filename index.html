@@ -79,6 +79,24 @@ body {
 
 
 
+    .letter-choice {
+  background: rgba(255,255,255,0.15);
+  margin: 16px auto;
+  padding: 18px;
+  max-width: 320px;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.letter-choice:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-4px);
+}
+
+
+
 .date {
   font-size: 0.85rem;
   color: var(--text-sub);
@@ -120,6 +138,31 @@ p {
         font-size: 1.8rem;
       }
     }
+
+
+#particles span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: sparkle 1.2s ease forwards;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: translate(0,0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0);
+  }
+}
+
+
+    
+    
   </style>
 </head>
 
@@ -308,11 +351,60 @@ p {
     ">🔒</span>
   </div>
 
+
+<div id="particles"></div>
+
+  
+
   <div style="margin-top: 20px; font-size: 1.1rem;">
     Đúng rồi, giỏi quá nha bà...
   </div>
 </div>
 
+
+  <div id="choose-letter" style="
+  display:none;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+  font-family: 'Playfair Display', serif;
+">
+
+  <h2 style="font-size:1.3rem; margin-bottom:30px;">
+    Em có 2 chuyện muốn nói<br>
+    chị đọc cái nào trước cũng được nha
+  </h2>
+
+  <div class="letter-choice" onclick="openLetter('past')">📜 Quá khứ</div>
+  <div class="letter-choice" onclick="openLetter('present')">✉️ Hiện tại</div>
+</div>
+
+
+<div id="letter-content" style="
+  display:none;
+  min-height:100vh;
+  background:#f8fbff;
+  padding:40px 20px;
+  font-family: 'Playfair Display', serif;
+">
+
+  <h2 id="letter-title"></h2>
+
+  <div id="letter-text" style="
+    margin-top:20px;
+    line-height:1.8;
+    font-size:1rem;
+  ">
+
+    test
+    <!-- ANH GHI NỘI DUNG THƯ Ở ĐÂY -->
+  </div>
+</div>
+
+  
+  
   
 <div id="content" style="display:none;">
   <div class="letter">
@@ -363,35 +455,56 @@ function login() {
     unlock.style.display = "flex";
 
     // 1️⃣ Mở khóa
-    setTimeout(() => {
-      lockIcon.innerText = "🔓";
-      heart.style.animation = "heartBeat 0.8s ease";
-    }, 600);
+setTimeout(() => {
+  lockIcon.innerText = "🔓";
+  heart.style.animation = "heartBeat 0.6s ease";
+}, 600);
 
-    // 2️⃣ Mờ dần
-    setTimeout(() => {
-      unlock.style.animation = "fadeOut 0.8s ease forwards";
-    }, 1600);
+setTimeout(() => {
+  explodeHeart();
+  heart.style.opacity = "0";
+}, 1300);
+
 
     // 3️⃣ Hiện thư
-    setTimeout(() => {
-      unlock.style.display = "none";
-      unlock.style.opacity = "1";
-      unlock.style.animation = "";
+setTimeout(() => {
+  document.getElementById("unlock-screen").style.display = "none";
+  document.getElementById("login-screen").style.display = "none";
+  document.getElementById("choose-letter").style.display = "block";
+}, 2200);
 
-      document.getElementById("login-screen").style.display = "none";
 
-      const content = document.getElementById("content");
-      content.style.display = "block";
-      content.style.animation = "fadeUp 0.9s ease";
-    }, 2400);
 
-  } else {
-    document.getElementById("error-box").style.display = "block";
+
+function explodeHeart() {
+  const box = document.getElementById("particles");
+  box.innerHTML = "";
+
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement("span");
+    s.style.setProperty("--x", `${Math.random()*200-100}px`);
+    s.style.setProperty("--y", `${Math.random()*200-100}px`);
+    box.appendChild(s);
   }
 }
 
 
+
+function openLetter(type) {
+  document.getElementById("choose-letter").style.display = "none";
+  document.getElementById("letter-content").style.display = "block";
+
+  if (type === "past") {
+    document.getElementById("letter-title").innerText = "📜 Quá khứ";
+    document.getElementById("letter-text").innerText = "Anh sẽ viết về quá khứ ở đây...";
+  } else {
+    document.getElementById("letter-title").innerText = "✉️ Hiện tại";
+    document.getElementById("letter-text").innerText = "Anh sẽ viết về hiện tại ở đây...";
+  }
+}
+
+  
+  
 
   function pressYes() {
     noScale += 0.4;
