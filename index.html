@@ -735,16 +735,23 @@ else  {
 
 function confirmSend() {
   const text = document.getElementById("feedbackText").value.trim();
+
   if (!text) {
     alert("Bé chưa viết gì hết á 😢");
     return;
   }
 
-  const ok = confirm("Chị muốn đọc lại hong?");
-  if (ok) return;
+  const isOk = confirm("Đọc kỹ chưa, gửi á nhaa 💌");
 
+  if (!isOk) {
+    // Cancel → không làm gì, cho chị đọc lại nội dung
+    return;
+  }
+
+  // OK → tiến hành gửi
   sendToGoogleForm(text);
 }
+
 
 
 
