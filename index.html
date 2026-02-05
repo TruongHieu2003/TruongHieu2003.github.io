@@ -733,38 +733,36 @@ else  {
 
 
 
-  function confirmSend() {
+function confirmSend() {
   const text = document.getElementById("feedbackText").value.trim();
   if (!text) {
     alert("Bé chưa viết gì hết á 😢");
     return;
   }
 
-  if (confirm("Chị muốn đọc lại hong?")) {
-    return; // ở lại để đọc lại
-  }
+  const ok = confirm("Chị muốn đọc lại hong?");
+  if (ok) return;
 
   sendToGoogleForm(text);
 }
 
-
-
-  function sendToGoogleForm(text) {
+function sendToGoogleForm(text) {
   const formURL =
     "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
 
   const data = new FormData();
   data.append("entry.1776165690", text);
 
-  // Hiện loading
-  document.querySelector(".send-btn").innerText = "Đang gửi… ⏳";
+  const btn = document.querySelector(".send-btn");
+  btn.innerText = "Đang gửi… ⏳";
+  btn.disabled = true;
 
   fetch(formURL, {
     method: "POST",
     mode: "no-cors",
     body: data
   }).then(() => {
-    document.querySelector(".send-btn").innerText = "Gửi thành công 💙";
+    btn.innerText = "Gửi thành công 💙";
     document.getElementById("feedbackText").value = "";
   });
 }
@@ -817,6 +815,15 @@ function backToMainMenu() {
 }
 
 
+
+
+function goHome() {
+  document.getElementById("feedback-screen").style.display = "none";
+  document.getElementById("main-menu").style.display = "block";
+}
+
+
+
 </script>
 
 
@@ -826,126 +833,13 @@ function backToMainMenu() {
 
 
 
-  <button onclick="backToMainMenu()" style="
-    background:none;
-    border:none;
-    color:#4facfe;
-    font-size:0.95rem;
-    cursor:pointer;
-  ">
-    ← Quay lại nè bé
-  </button>
-
-  <div style="
-    max-width:720px;
-    margin:30px auto;
-    background:white;
-    padding:36px 30px;
-    border-radius:18px;
-    box-shadow:0 25px 60px rgba(0,60,120,0.18);
-  ">
-
-    <h2 style="margin-bottom:20px; color:#1f3a5f;">
-      Chị viết cho em nè 💙
-    </h2>
-
-    <textarea id="feedback-text"
-      placeholder="viết dô chỗ này nè bé"
-      style="
-        width:100%;
-        min-height:160px;
-        padding:14px;
-        border-radius:12px;
-        border:1px solid #d0e6ff;
-        font-size:1rem;
-        resize:none;
-        font-family:Inter, sans-serif;
-      "
-    ></textarea>
-
-<button onclick="askBeforeSend()" style="
-  margin-top:18px;
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:#4facfe;
-  color:white;
-  font-size:1rem;
-  cursor:pointer;
-">
-  Gửi 💌
-</button>
-
-
-    <p id="feedback-result" style="
-      display:none;
-      margin-top:16px;
-      color:#4a6fa5;
-      text-align:center;
-    ">
-      Em nhận được rồi nhaa 💙
-    </p>
-
-  </div>
-</div>
-
-  
-
-
-<script>
-let pendingMessage = "";
-
-function confirmSend() {
-  const text = document.getElementById("feedbackText").value.trim();
-  if (!text) {
-    alert("Bé chưa viết gì hết á 😢");
-    return;
-  }
-
-  if (confirm("Chị muốn đọc lại hong?")) {
-    return;
-  }
-
-  sendToGoogleForm(text);
-}
-
-function sendToGoogleForm(text) {
-  const formURL =
-    "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
-
-  const data = new FormData();
-  data.append("entry.1776165690", text);
-
-  const btn = document.querySelector(".send-btn");
-  btn.innerText = "Đang gửi… ⏳";
-  btn.disabled = true;
-
-  fetch(formURL, {
-    method: "POST",
-    mode: "no-cors",
-    body: data
-  }).then(() => {
-    btn.innerText = "Gửi thành công 💙";
-    document.getElementById("feedbackText").value = "";
-  });
-}
-</script>
 
 
   
 
 
 
-<div id="confirm-send" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.4);
-  justify-content:center;
-  align-items:center;
-  z-index:3000;
-">
+
 
   <div style="
     background:white;
