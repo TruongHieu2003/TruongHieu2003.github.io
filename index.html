@@ -37,14 +37,7 @@ body {
 }
 
 
-.letter {
-  max-width: 680px;
-  width: 100%;
-  background: var(--paper);
-  padding: 48px 36px;
-  border-radius: 20px;
-  box-shadow: 0 30px 70px rgba(0, 60, 120, 0.25);
-}
+
 
 
 .date {
@@ -93,30 +86,131 @@ p {
 
 <body>
 
-  <div class="letter">
-    <div class="date">
-      Một ngày bình thường
-    </div>
+<!-- LOGIN SCREEN -->
+<div id="login-screen" style="
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 999;
+">
 
-    <h1>
-      Gửi Hoài Ý,
-    </h1>
+  <div style="
+    background: #fff;
+    max-width: 420px;
+    width: 100%;
+    padding: 32px 26px;
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+    text-align: center;
+    font-family: Inter, sans-serif;
+  ">
 
-    <p>
-      Có những điều khi viết ra, anh không mong nó trở nên hoàn hảo.
-      Chỉ mong khi em đọc, em cảm thấy dễ chịu.
+    <h2 style="
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      margin-bottom: 14px;
+      color: #1f3a5f;
+    ">
+      Đăng nhập đi bé 💙
+    </h2>
+
+    <p style="
+      font-size: 0.95rem;
+      color: #4a6fa5;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    ">
+      Tài khoản là <b>tên của chị</b><br>
+      Mật khẩu là <b>tên của em</b><br>
+      <i>(không dấu, không cách gì hết nha ní)</i>
     </p>
 
-    <p>
-      Như cách em xuất hiện —
-      không ồn ào,
-      nhưng đủ để mọi thứ xung quanh trở nên dịu lại.
+    <input id="username" placeholder="Tài khoản"
+      style="
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        border: 1px solid #d0e6ff;
+        font-size: 0.95rem;
+      "
+    >
+
+    <input id="password" type="password" placeholder="Mật khẩu"
+      style="
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        border: 1px solid #d0e6ff;
+        font-size: 0.95rem;
+      "
+    >
+
+    <button onclick="login()"
+      style="
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        background: #4facfe;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+      "
+    >
+      Đăng nhập
+    </button>
+
+    <p id="error" style="
+      margin-top: 14px;
+      color: #e74c3c;
+      font-size: 0.85rem;
+      display: none;
+    ">
+      Sai rồi nè, nhập lại đi 💔
     </p>
 
-    <div class="signature">
-      —
-    </div>
   </div>
+</div>
+
+<!-- LOVE LETTER (ẨN BAN ĐẦU) -->
+<div id="content" style="display:none;">
+.letter {
+  max-width: 680px;
+  width: 100%;
+  background: var(--paper);
+  padding: 48px 36px;
+  border-radius: 20px;
+  box-shadow: 0 30px 70px rgba(0, 60, 120, 0.25);
+}
+</div>
+
+<script>
+  const users = [
+    { username: "0909519424", password: "24052003Hieu" },
+    { username: "nguyenthihoaiy", password: "nguyentruonghieu" }
+  ];
+
+  function login() {
+    const u = document.getElementById("username").value.trim();
+    const p = document.getElementById("password").value.trim();
+
+    const ok = users.some(user => user.username === u && user.password === p);
+
+    if (ok) {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    } else {
+      document.getElementById("error").style.display = "block";
+    }
+  }
+</script>
+
 
 </body>
 </html>
