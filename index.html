@@ -770,19 +770,20 @@ function backToMainMenu() {
       "
     ></textarea>
 
-    <button onclick="sendFeedback()" style="
-      margin-top:18px;
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:12px;
-      background:#4facfe;
-      color:white;
-      font-size:1rem;
-      cursor:pointer;
-    ">
-      Gửi 💌
-    </button>
+<button onclick="askBeforeSend()" style="
+  margin-top:18px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#4facfe;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+">
+  Gửi 💌
+</button>
+
 
     <p id="feedback-result" style="
       display:none;
@@ -800,6 +801,45 @@ function backToMainMenu() {
 
 
 <script>
+
+
+
+
+
+<script>
+let pendingMessage = "";
+
+function askBeforeSend() {
+  const text = document.getElementById("feedback-text").value.trim();
+  if (!text) return;
+
+  pendingMessage = text;
+  document.getElementById("confirm-send").style.display = "flex";
+}
+
+function cancelSend() {
+  document.getElementById("confirm-send").style.display = "none";
+}
+
+async function confirmSend() {
+  document.getElementById("confirm-send").style.display = "none";
+
+  const result = document.getElementById("feedback-result");
+  result.style.display = "block";
+  result.innerText = "Đang gửi cho em nè... 💭";
+
+  await sendToGoogleForm(pendingMessage);
+
+  result.innerText = "Em nhận được rồi nhaa 💙";
+  document.getElementById("feedback-text").value = "";
+}
+</script>
+
+
+
+
+
+  
 async function sendToGoogleForm(message) {
   const formUrl = "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
 
@@ -821,6 +861,58 @@ async function sendToGoogleForm(message) {
 
   
 
+
+
+<div id="confirm-send" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  justify-content:center;
+  align-items:center;
+  z-index:3000;
+">
+
+  <div style="
+    background:white;
+    padding:28px 30px;
+    border-radius:18px;
+    text-align:center;
+    max-width:320px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.25);
+    animation:fadeIn 0.3s ease;
+  ">
+    <p style="font-size:1.05rem; color:#1f3a5f; margin-bottom:22px;">
+      Chị muốn đọc lại hong 🥺
+    </p>
+
+    <div style="display:flex; gap:14px; justify-content:center;">
+      <button onclick="confirmSend()" style="
+        padding:8px 18px;
+        border:none;
+        border-radius:10px;
+        background:#4facfe;
+        color:white;
+        cursor:pointer;
+      ">
+        Gửi 💌
+      </button>
+
+      <button onclick="cancelSend()" style="
+        padding:8px 18px;
+        border:none;
+        border-radius:10px;
+        background:#bdc3c7;
+        color:#2c3e50;
+        cursor:pointer;
+      ">
+        Chị đọc lại
+      </button>
+    </div>
+  </div>
+</div>
+
+  
 
   
 </body>
