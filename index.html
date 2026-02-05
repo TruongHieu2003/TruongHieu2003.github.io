@@ -9,6 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
+
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+
+
+    
 :root {
   --bg-start: #4facfe;
   --bg-end: #00c6ff;
@@ -218,6 +228,33 @@ p {
 </div>
 
 
+    <div id="hint" style="
+  display:none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+">
+
+  <div style="
+    background: white;
+    padding: 26px 30px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 1rem;
+    color: #1f3a5f;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease;
+  ">
+    chị thêm số 1 vào cuối mk nữa nha =))))
+  </div>
+
+</div>
+
+
+
   </div>
 </div>
 
@@ -283,9 +320,15 @@ p {
     }
   }
 
-  function pressNo() {
-    alert("Biết liền mà 😌");
-  }
+function pressNo() {
+  const hint = document.getElementById("hint");
+  hint.style.display = "flex";
+
+  setTimeout(() => {
+    hint.style.display = "none";
+  }, 5000);
+}
+
 </script>
 
 
