@@ -822,7 +822,9 @@ function goHome() {
   
 <script>
 async function sendToGoogleForm(message) {
-  const formUrl = "https://docs.google.com/forms/d/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
+  const formUrl =
+    "https://docs.google.com/forms/d/e/1FAIpQLSenGRHC4E0oGVCNhernWZnTgU8CVS8EK7gWeMYQKM_3uz1ghQ/formResponse";
+
   const formData = new FormData();
   formData.append("entry.1776165690", message);
 
@@ -833,11 +835,12 @@ async function sendToGoogleForm(message) {
       mode: "no-cors"
     });
     return true;
-  } catch (err) {
+  } catch (e) {
     return false;
   }
 }
 </script>
+
 
   
 </body>
