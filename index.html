@@ -824,13 +824,7 @@ function backToMainMenu() {
 
 
 
-<div id="feedback-screen" style="
-  display:none;
-  min-height:100vh;
-  background: linear-gradient(135deg, #eaf6ff, #f7fbff);
-  padding:50px 20px;
-  font-family:'Playfair Display', serif;
-">
+
 
   <button onclick="backToMainMenu()" style="
     background:none;
@@ -900,63 +894,44 @@ function backToMainMenu() {
 
 
 <script>
-
-
-
-
-
-<script>
 let pendingMessage = "";
 
-function askBeforeSend() {
-  const text = document.getElementById("feedback-text").value.trim();
-  if (!text) return;
-
-  pendingMessage = text;
-  document.getElementById("confirm-send").style.display = "flex";
-}
-
-function cancelSend() {
-  document.getElementById("confirm-send").style.display = "none";
-}
-
-async function confirmSend() {
-  document.getElementById("confirm-send").style.display = "none";
-
-  const result = document.getElementById("feedback-result");
-  result.style.display = "block";
-  result.innerText = "Đang gửi cho em nè... 💭";
-
-  await sendToGoogleForm(pendingMessage);
-
-  result.innerText = "Em nhận được rồi nhaa 💙";
-  document.getElementById("feedback-text").value = "";
-}
-</script>
-
-
-
-
-
-  
-async function sendToGoogleForm(message) {
-  const formUrl = "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
-
-  const formData = new FormData();
-  formData.append("entry.1776165690", message);
-
-  try {
-    await fetch(formUrl, {
-      method: "POST",
-      body: formData,
-      mode: "no-cors"
-    });
-    return true;
-  } catch (err) {
-    return false;
+function confirmSend() {
+  const text = document.getElementById("feedbackText").value.trim();
+  if (!text) {
+    alert("Bé chưa viết gì hết á 😢");
+    return;
   }
+
+  if (confirm("Chị muốn đọc lại hong?")) {
+    return;
+  }
+
+  sendToGoogleForm(text);
+}
+
+function sendToGoogleForm(text) {
+  const formURL =
+    "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
+
+  const data = new FormData();
+  data.append("entry.1776165690", text);
+
+  const btn = document.querySelector(".send-btn");
+  btn.innerText = "Đang gửi… ⏳";
+  btn.disabled = true;
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  }).then(() => {
+    btn.innerText = "Gửi thành công 💙";
+    document.getElementById("feedbackText").value = "";
+  });
 }
 </script>
+
 
   
 
