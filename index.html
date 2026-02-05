@@ -161,6 +161,28 @@ p {
 }
 
 
+.heart-float {
+  display: inline-block;
+  animation: floatHeart 2.5s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.sparkle {
+  animation: sparkle 1.5s infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+
+    
     
     
   </style>
@@ -554,10 +576,56 @@ if (type === "past") {
   `;
 }
 
-  else {
-    document.getElementById("letter-title").innerText = "✉️ Hiện tại";
-    document.getElementById("letter-text").innerText = "Anh sẽ viết về hiện tại ở đây...";
-  }
+else (type === "current") {
+  document.getElementById("letter-title").innerHTML =
+    "✉️ Hiện tại <span class='heart-float'>💙</span>";
+
+  document.getElementById("letter-text").innerHTML = `
+    <p>
+      Hiện tại và tương lai của em hả, còn đợi nhắc nữa hả, là chị đó.
+    </p>
+
+    <p>
+      Tại sao chị không tới sớm hơn, chị mà tới sớm hơn là em không có ngu tới bây giờ đâu.
+    </p>
+
+    <p>
+      Em đã từng có suy nghĩ vầy nè, hồi đó giờ chỉ có 1 tình yêu thì không biết
+      là còn tình yêu nào tốt hơn nữa không, bây giờ là có câu trả lời rồi đó,
+      em cảm thấy tốt lắm.
+    </p>
+
+    <p>
+      Em với chị tìm hiểu nhau vẫn còn ít lắm, nhưng mà em thấy không quan trọng.
+    </p>
+
+    <p>
+      Tính ra mình cũng được trời sắp xếp lắm á chứ,
+      tự nhiên đi thực tập chỗ đó, rồi phải kiếm ktx gần chỗ,
+      rồi tự nhiên chị dắt em đi coi phòng,
+      rồi tự nhiên em phải chị =)).
+    </p>
+
+    <p>
+      Nên là em cám ơn chị nhiều lắm,
+      cám ơn vì đã xuất hiện bên em.
+    </p>
+
+    <p>
+      Em sẽ không kể xấu tốt gì về bản thân đâu,
+      từ từ rồi chị sẽ nhìn ra thôi.
+    </p>
+
+    <p>
+      Lời cuối cùng dặn dò bé của em là
+      <b>chọn em quài nha</b>,
+      <span class="crown">👑</span>
+      <b>làm công chúa của em quài nha</b>
+      <span class="sparkle">✨</span>
+    </p>
+  `;
+}
+
 }
 
   
