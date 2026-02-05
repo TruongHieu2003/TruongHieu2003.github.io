@@ -384,6 +384,33 @@ p {
 </div>
 
 
+  <div id="main-menu" style="
+  display:none;
+  min-height:100vh;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
+  padding:40px 20px;
+  text-align:center;
+  color:white;
+  font-family:'Playfair Display', serif;
+">
+
+  <h2 style="font-size:1.3rem; margin-bottom:30px;">
+    Chị chọn nha 💙
+  </h2>
+
+  <div class="letter-choice" onclick="openLetters()">
+    💌 Thư em gửi chị
+  </div>
+
+  <div class="letter-choice" onclick="openFeedback()">
+    💭 Nào chị đọc xong hết thì bấm dô đây<br>
+    để nói cho em biết chị nghĩ sao nhaa
+  </div>
+</div>
+
+
+  
+
   <div id="choose-letter" style="
   display:none;
   min-height: 100vh;
@@ -491,7 +518,8 @@ function login() {
     setTimeout(() => {
       unlock.style.display = "none";
       document.getElementById("login-screen").style.display = "none";
-      document.getElementById("choose-letter").style.display = "block";
+      document.getElementById("main-menu").style.display = "block";
+
     }, 2200);
 
   } else {
@@ -655,6 +683,26 @@ function pressNo() {
   }, 5000);
 }
 
+
+
+function openLetters() {
+  document.getElementById("main-menu").style.display = "none";
+  document.getElementById("choose-letter").style.display = "block";
+}
+
+function openFeedback() {
+  document.getElementById("main-menu").style.display = "none";
+  document.getElementById("feedback-screen").style.display = "block";
+}
+
+function backToMainMenu() {
+  document.getElementById("choose-letter").style.display = "none";
+  document.getElementById("letter-content").style.display = "none";
+  document.getElementById("feedback-screen").style.display = "none";
+  document.getElementById("main-menu").style.display = "block";
+}
+
+
 </script>
 
 
@@ -662,6 +710,78 @@ function pressNo() {
 
 
 
+<div id="feedback-screen" style="
+  display:none;
+  min-height:100vh;
+  background: linear-gradient(135deg, #eaf6ff, #f7fbff);
+  padding:50px 20px;
+  font-family:'Playfair Display', serif;
+">
+
+  <button onclick="backToMainMenu()" style="
+    background:none;
+    border:none;
+    color:#4facfe;
+    font-size:0.95rem;
+    cursor:pointer;
+  ">
+    ← Quay lại nè bé
+  </button>
+
+  <div style="
+    max-width:720px;
+    margin:30px auto;
+    background:white;
+    padding:36px 30px;
+    border-radius:18px;
+    box-shadow:0 25px 60px rgba(0,60,120,0.18);
+  ">
+
+    <h2 style="margin-bottom:20px; color:#1f3a5f;">
+      Chị viết cho em nè 💙
+    </h2>
+
+    <textarea id="feedback-text"
+      placeholder="viết dô chỗ này nè bé"
+      style="
+        width:100%;
+        min-height:160px;
+        padding:14px;
+        border-radius:12px;
+        border:1px solid #d0e6ff;
+        font-size:1rem;
+        resize:none;
+        font-family:Inter, sans-serif;
+      "
+    ></textarea>
+
+    <button onclick="sendFeedback()" style="
+      margin-top:18px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      background:#4facfe;
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+    ">
+      Gửi 💌
+    </button>
+
+    <p id="feedback-result" style="
+      display:none;
+      margin-top:16px;
+      color:#4a6fa5;
+      text-align:center;
+    ">
+      Em nhận được rồi nhaa 💙
+    </p>
+
+  </div>
+</div>
+
+  
 
 
 
