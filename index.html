@@ -390,6 +390,19 @@ p {
   font-family: 'Playfair Display', serif;
 ">
 
+
+  <button onclick="backToChoose()" style="
+  background:none;
+  border:none;
+  color:#4facfe;
+  font-size:0.95rem;
+  cursor:pointer;
+">
+  ← Quay lại chọn thư
+</button>
+
+
+  
   <h2 id="letter-title"></h2>
 
   <div id="letter-text" style="
@@ -448,32 +461,45 @@ function login() {
   const ok = users.some(user => user.username === u && user.password === p);
 
   if (ok) {
+    // reset lỗi cũ
+    document.getElementById("error-box").style.display = "none";
+
     const unlock = document.getElementById("unlock-screen");
     const lockIcon = document.getElementById("lock-icon");
     const heart = document.getElementById("heart-lock");
 
     unlock.style.display = "flex";
 
-    // 1️⃣ Mở khóa
-setTimeout(() => {
-  lockIcon.innerText = "🔓";
-  heart.style.animation = "heartBeat 0.6s ease";
-}, 600);
+    setTimeout(() => {
+      lockIcon.innerText = "🔓";
+      heart.style.animation = "heartBeat 0.6s ease";
+    }, 600);
 
-setTimeout(() => {
-  explodeHeart();
-  heart.style.opacity = "0";
-}, 1300);
+    setTimeout(() => {
+      explodeHeart();
+      heart.style.opacity = "0";
+    }, 1300);
+
+    setTimeout(() => {
+      unlock.style.display = "none";
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("choose-letter").style.display = "block";
+    }, 2200);
+
+  } else {
+    // 👇 PHẦN BỊ THIẾU
+    document.getElementById("error-box").style.display = "block";
+  }
+}
 
 
-    // 3️⃣ Hiện thư
-setTimeout(() => {
-  document.getElementById("unlock-screen").style.display = "none";
-  document.getElementById("login-screen").style.display = "none";
+
+function backToChoose() {
+  document.getElementById("letter-content").style.display = "none";
   document.getElementById("choose-letter").style.display = "block";
-}, 2200);}}
+}
 
-
+  
 
 
 function explodeHeart() {
@@ -493,6 +519,7 @@ function explodeHeart() {
 function openLetter(type) {
   document.getElementById("choose-letter").style.display = "none";
   document.getElementById("letter-content").style.display = "block";
+  document.getElementById("letter-text").innerHTML = "";
 
   if (type === "past") {
     document.getElementById("letter-title").innerText = "📜 Quá khứ";
