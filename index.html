@@ -174,14 +174,49 @@ p {
       Đăng nhập
     </button>
 
-    <p id="error" style="
-      margin-top: 14px;
-      color: #e74c3c;
-      font-size: 0.85rem;
-      display: none;
+<div id="error-box" style="
+  display:none;
+  margin-top: 18px;
+  text-align: center;
+">
+  <p style="
+    color:#e74c3c;
+    font-size:0.95rem;
+    margin-bottom:12px;
+  ">
+    Sai rồi, tại em có đưa mk đúng đâu =))) <br>
+    giờ chị muốn biết mk đúng không .-.
+  </p>
+
+  <div style="display:flex; justify-content:center; gap:20px;">
+    <button id="btn-yes" onclick="pressYes()" style="
+      padding:6px 16px;
+      border:none;
+      border-radius:8px;
+      background:#4facfe;
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+      transition:all 0.2s ease;
     ">
-      Sai rồi nè, nhập lại đi 💔
-    </p>
+      Có
+    </button>
+
+    <button id="btn-no" onclick="pressNo()" style="
+      padding:6px 16px;
+      border:none;
+      border-radius:8px;
+      background:#bdc3c7;
+      color:#2c3e50;
+      font-size:1rem;
+      cursor:pointer;
+      transition:all 0.2s ease;
+    ">
+      Không
+    </button>
+  </div>
+</div>
+
 
   </div>
 </div>
@@ -219,6 +254,8 @@ p {
     { username: "nguyenthihoaiy", password: "nguyentruonghieu1" }
   ];
 
+  let noScale = 1;
+
   function login() {
     const u = document.getElementById("username").value.trim();
     const p = document.getElementById("password").value.trim();
@@ -229,10 +266,28 @@ p {
       document.getElementById("login-screen").style.display = "none";
       document.getElementById("content").style.display = "block";
     } else {
-      document.getElementById("error").style.display = "block";
+      document.getElementById("error-box").style.display = "block";
     }
   }
+
+  function pressYes() {
+    noScale += 0.4;
+    const btnNo = document.getElementById("btn-no");
+    const btnYes = document.getElementById("btn-yes");
+
+    btnNo.style.transform = `scale(${noScale})`;
+
+    if (noScale >= 2.5) {
+      btnYes.style.opacity = "0";
+      btnYes.style.pointerEvents = "none";
+    }
+  }
+
+  function pressNo() {
+    alert("Biết liền mà 😌");
+  }
 </script>
+
 
 
 </body>
