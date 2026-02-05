@@ -421,6 +421,21 @@ p {
   font-family: 'Playfair Display', serif;
 ">
 
+
+<button onclick="backToMainMenu()" style="
+  background:none;
+  border:none;
+  color:#ffffff;
+  font-size:0.95rem;
+  cursor:pointer;
+  margin-bottom:20px;
+  opacity:0.9;
+">
+  ← Quay lại nè bé
+</button>
+
+    
+
   <h2 style="font-size:1.3rem; margin-bottom:30px;">
     Em có 2 chuyện muốn nói<br>
     chị đọc cái nào trước cũng được nha
@@ -783,6 +798,28 @@ function backToMainMenu() {
 
   
 
+
+<script>
+async function sendToGoogleForm(message) {
+  const formUrl = "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
+
+  const formData = new FormData();
+  formData.append("entry.1776165690", message);
+
+  try {
+    await fetch(formUrl, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    });
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+</script>
+
+  
 
 
   
