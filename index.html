@@ -182,6 +182,49 @@ p {
 }
 
 
+
+
+.screen {
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+textarea {
+  width: 100%;
+  min-height: 160px;
+  border-radius: 14px;
+  border: none;
+  padding: 16px;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+}
+
+.send-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 999px;
+  border: none;
+  background: #1e90ff;
+  color: white;
+  cursor: pointer;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+
     
     
     
@@ -407,6 +450,25 @@ p {
     để nói cho em biết chị nghĩ sao nhaa
   </div>
 </div>
+
+
+
+
+<!-- FEEDBACK SCREEN -->
+<div id="feedback-screen" class="screen hidden">
+  <button class="back-btn" onclick="goHome()">← Quay lại</button>
+
+  <h2 class="title">💙 Chị nghĩ sao thì viết cho em nè</h2>
+
+  <textarea
+    id="feedbackText"
+    placeholder="viết dô chỗ này nè bé"
+  ></textarea>
+
+  <button class="send-btn" onclick="confirmSend()">Gửi 💌</button>
+</div>
+
+  
 
 
   
@@ -669,7 +731,44 @@ else  {
 
 }
 
-  
+
+
+  function confirmSend() {
+  const text = document.getElementById("feedbackText").value.trim();
+  if (!text) {
+    alert("Bé chưa viết gì hết á 😢");
+    return;
+  }
+
+  if (confirm("Chị muốn đọc lại hong?")) {
+    return; // ở lại để đọc lại
+  }
+
+  sendToGoogleForm(text);
+}
+
+
+
+  function sendToGoogleForm(text) {
+  const formURL =
+    "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
+
+  const data = new FormData();
+  data.append("entry.1776165690", text);
+
+  // Hiện loading
+  document.querySelector(".send-btn").innerText = "Đang gửi… ⏳";
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  }).then(() => {
+    document.querySelector(".send-btn").innerText = "Gửi thành công 💙";
+    document.getElementById("feedbackText").value = "";
+  });
+}
+
   
 
   function pressYes() {
