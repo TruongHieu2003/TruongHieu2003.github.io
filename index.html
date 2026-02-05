@@ -881,6 +881,24 @@ function goHome() {
 </div>
 
   
+<script>
+async function sendToGoogleForm(message) {
+  const formUrl = "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
+  const formData = new FormData();
+  formData.append("entry.1776165690", message);
+
+  try {
+    await fetch(formUrl, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    });
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+</script>
 
   
 </body>
