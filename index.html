@@ -746,26 +746,7 @@ function confirmSend() {
   sendToGoogleForm(text);
 }
 
-function sendToGoogleForm(text) {
-  const formURL =
-    "https://docs.google.com/forms/d/e/1wpbzyZqU64PTEZ5HBfuBsMXoJs1ejQw5INiMkkArcSE/formResponse";
 
-  const data = new FormData();
-  data.append("entry.1776165690", text);
-
-  const btn = document.querySelector(".send-btn");
-  btn.innerText = "Đang gửi… ⏳";
-  btn.disabled = true;
-
-  fetch(formURL, {
-    method: "POST",
-    mode: "no-cors",
-    body: data
-  }).then(() => {
-    btn.innerText = "Gửi thành công 💙";
-    document.getElementById("feedbackText").value = "";
-  });
-}
 
   
 
