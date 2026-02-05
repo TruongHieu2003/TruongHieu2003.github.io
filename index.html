@@ -326,6 +326,10 @@ function pressNo() {
 
   setTimeout(() => {
     hint.style.display = "none";
+    noScale = 1;
+    document.getElementById("btn-no").style.transform = "scale(1)";
+    document.getElementById("btn-yes").style.opacity = "1";
+    document.getElementById("btn-yes").style.pointerEvents = "auto";
   }, 5000);
 }
 
